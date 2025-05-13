@@ -68,6 +68,23 @@
             justify-content: center;
             gap: 15px;
         }
+        .solution-text {
+            display: none;
+            font-size: 22px;
+            color: #ff0000;
+            font-weight: bold;
+            margin: 25px auto;
+            padding: 20px;
+            background-color: #fff0f0;
+            border-radius: 10px;
+            max-width: 90%;
+            line-height: 1.6;
+            border: 2px solid #ff0000;
+        }
+        .solution-text span {
+            display: block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -89,11 +106,19 @@
     
     <div class="action-buttons">
         <button class="btn btn-action" onclick="showQQGroup()">领取</button>
-        <button class="btn btn-action" onclick="solveJMProblem()">解决JM问题</button>
+        <button class="btn btn-action" onclick="showSolution()">解决JM问题</button>
     </div>
     
     <div id="qq-group" class="qq-group">
         QQ群号：618638217
+    </div>
+
+    <div id="solution-text" class="solution-text">
+        <span>挂梯子解决JM更新问题！</span>
+        <span>我有两种梯子：</span>
+        <span>一种每天免费一小时的9块</span>
+        <span>一种永久破解版的无限时长15块</span>
+        <span>私信快手主播拿进梯子的群号</span>
     </div>
 
     <script>
@@ -112,8 +137,10 @@
             alert('请加QQ群：618638217');
         }
 
-        function solveJMProblem() {
-            window.location.href = "https://virtuous-coconut-1g7f5z.mysxl.cn/";
+        function showSolution() {
+            const solutionDiv = document.getElementById('solution-text');
+            solutionDiv.style.display = 'block';
+            solutionDiv.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
