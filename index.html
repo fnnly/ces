@@ -28,7 +28,7 @@
         .payment-img {
             max-width: 200px;
             margin: 15px auto;
-            display: block;
+            display: none;
         }
         .btn {
             background-color: #4CAF50;
@@ -56,14 +56,11 @@
         .btn-claim:hover {
             background-color: #e68a00;
         }
-        .hidden {
+        .qq-group {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
             display: none;
-        }
-        #confirmation {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -73,69 +70,37 @@
     <p>加群QQ618638217领取</p>
     
     <div class="payment-option">
-        <p>截图，微信扫下面的赞赏码码付款</p>
-        <img src="https://sfile.chatglm.cn/chatglm4/9cf34885-7efc-46fb-9134-c566a81de03b.jpg?image_process=format,webp&time=0" class="payment-img" alt="微信付款码">
-        <button class="btn btn-pay" onclick="payWithWechat()">微信支付</button>
-        <div id="wechat-confirmation" class="hidden">
-            <p>已通过微信支付7元</p>
-            <button class="btn btn-claim" onclick="claimMembership('wechat')">领取进群密码</button>
-        </div>
+        <p>微信扫码付款</p>
+        <img id="wechat-qr" src="https://sfile.chatglm.cn/chatglm4/9cf34885-7efc-46fb-9134-c566a81de03b.jpg?image_process=format,webp&time=0" class="payment-img" alt="微信付款码">
+        <button class="btn btn-pay" onclick="showWechatQR()">微信支付</button>
     </div>
     
     <div class="payment-option">
-        <h1>截图，支付宝扫下面的码付款</h1>
-        <img src="https://sfile.chatglm.cn/chatglm4/e0a0bf62-c712-4b47-a20f-9a51df8f16cd.jpg?image_process=format,webp&time=0" class="payment-img" alt="支付宝付款码">
-        <button class="btn btn-pay" onclick="payWithAlipay()">支付宝支付</button>
-        <div id="alipay-confirmation" class="hidden">
-            <p>已通过支付宝支付7元</p>
-            <button class="btn btn-claim" onclick="claimMembership('alipay')">领取进群密码</button>
-        </div>
+        <p>支付宝扫码付款</p>
+        <img id="alipay-qr" src="https://sfile.chatglm.cn/chatglm4/e0a0bf62-c712-4b47-a20f-9a51df8f16cd.jpg?image_process=format,webp&time=0" class="payment-img" alt="支付宝付款码">
+        <button class="btn btn-pay" onclick="showAlipayQR()">支付宝支付</button>
     </div>
     
-    <div id="password-display" class="hidden">
-        <h2>您的进群密码是：</h2>
-        <p id="password" style="font-size: 24px; font-weight: bold;"></p>
-        <p>请加QQ群 618638217 并使用此密码加入</p>
+    <button class="btn btn-claim" onclick="showQQGroup()">领取</button>
+    <div id="qq-group" class="qq-group">
+        QQ群号：618638217
     </div>
 
     <script>
-        function payWithWechat() {
-            document.getElementById('wechat-confirmation').classList.remove('hidden');
-            alert('请扫描上方微信二维码完成支付，支付完成后点击"领取进群密码"按钮');
+        function showWechatQR() {
+            document.getElementById('wechat-qr').style.display = 'block';
+            document.getElementById('alipay-qr').style.display = 'none';
         }
         
-        function payWithAlipay() {
-            document.getElementById('alipay-confirmation').classList.remove('hidden');
-            alert('请扫描上方支付宝二维码完成支付，支付完成后点击"领取进群密码"按钮');
+        function showAlipayQR() {
+            document.getElementById('alipay-qr').style.display = 'block';
+            document.getElementById('wechat-qr').style.display = 'none';
         }
         
-        function claimMembership(paymentMethod) {
-            // In a real implementation, you would verify payment with your backend
-            // For this demo, we'll just generate a random password
-            
-            const password = generatePassword();
-            document.getElementById('password').textContent = password;
-            document.getElementById('password-display').classList.remove('hidden');
-            
-            // Scroll to the password display
-            document.getElementById('password-display').scrollIntoView({ behavior: 'smooth' });
-            
-            alert('进群密码已生成！请加QQ群 618638217 并使用此密码加入');
-        }
-        
-        function generatePassword() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            let password = '';
-            for (let i = 0; i < 6; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return password;
+        function showQQGroup() {
+            document.getElementById('qq-group').style.display = 'block';
+            alert('请加QQ群：618638217');
         }
     </script>
-</body>
-</html>>
-    <img src="wechat-pay.jpg" alt="微信赞赏码">
-    <p>付款后，请加群QQ618638217领取：</p>
-    <img src="qq-group.jpg" alt="QQ群二维码">
 </body>
 </html>
