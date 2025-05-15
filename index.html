@@ -19,11 +19,18 @@
         p {
             margin: 15px 0;
         }
-        .payment-option {
+        .payment-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin: 30px 0;
+        }
+        .payment-option {
+            flex: 1;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
+            max-width: 250px;
         }
         .payment-img {
             max-width: 200px;
@@ -56,30 +63,31 @@
         .btn-action:hover {
             background-color: #d32f2f;
         }
-        .qq-group {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 20px 0;
-            display: none;
+        .btn-resource {
+            background-color: #4CAF50;
         }
-        .action-buttons {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        .btn-resource:hover {
+            background-color: #45a049;
         }
-        .solution-text {
+        .info-box {
             display: none;
-            font-size: 22px;
-            color: #ff0000;
-            font-weight: bold;
+            font-size: 18px;
             margin: 25px auto;
             padding: 20px;
-            background-color: #fff0f0;
             border-radius: 10px;
             max-width: 90%;
             line-height: 1.6;
-            border: 2px solid #ff0000;
+            border: 2px solid;
+        }
+        .solution-text {
+            color: #ff0000;
+            border-color: #ff0000;
+            background-color: #fff0f0;
+        }
+        .custom-text {
+            color: #333;
+            border-color: #4CAF50;
+            background-color: #f0fff4;
         }
     </style>
 </head>
@@ -89,41 +97,48 @@
     <p>加QQ群1042353516领取</p>
     <p>私信快手主播拿进裙密码</p>
     <p>放心，主播是诚信的，主播看到后会第一时间发密码的</p>
-    
-    <div class="payment-option">
-        <p>微信扫码付款</p>
-        <img id="wechat-qr" src="https://sfile.chatglm.cn/chatglm4/9cf34885-7efc-46fb-9134-c566a81de03b.jpg?image_process=format,webp&time=0" class="payment-img" alt="微信付款码">
-        <button class="btn btn-pay" onclick="showWechatQR()">微信支付</button>
+
+    <div class="payment-container">
+        <div class="payment-option">
+            <p>微信扫码付款</p>
+            <img id="wechat-qr" src="https://sfile.chatglm.cn/chatglm4/9cf34885-7efc-46fb-9134-c566a81de03b.jpg?image_process=format,webp&time=0" class="payment-img" alt="微信付款码">
+            <button class="btn btn-pay" onclick="showPayment('wechat')">微信支付</button>
+        </div>
+        
+        <div class="payment-option">
+            <p>支付宝扫码付款</p>
+            <img id="alipay-qr" src="https://sfile.chatglm.cn/chatglm4/e0a0bf62-c712-4b47-a20f-9a51df8f16cd.jpg?image_process=format,webp&time=0" class="payment-img" alt="支付宝付款码">
+            <button class="btn btn-pay" onclick="showPayment('alipay')">支付宝支付</button>
+        </div>
     </div>
-    
-    <div class="payment-option">
-        <p>支付宝扫码付款</p>
-        <img id="alipay-qr" src="https://sfile.chatglm.cn/chatglm4/e0a0bf62-c712-4b47-a20f-9a51df8f16cd.jpg?image_process=format,webp&time=0" class="payment-img" alt="支付宝付款码">
-        <button class="btn btn-pay" onclick="showAlipayQR()">支付宝支付</button>
-    </div>
-    
+
     <div class="action-buttons">
         <button class="btn btn-action" onclick="showQQGroup()">领取JM</button>
-        <button class="btn btn-action" onclick="showSolution()">解决JM进不去的问题</button>
+        <button class="btn btn-action" onclick="showSolution()">解决JM问题</button>
+        <button class="btn btn-resource" onclick="showCustomText()">其他资源</button>
     </div>
     
     <div id="qq-group" class="qq-group">
         QQ群号：1042353516
     </div>
 
-    <div id="solution-text" class="solution-text">
+    <div id="solution-text" class="info-box solution-text">
         挂梯子解决JM更新问题，我有两种梯子，一种每天免费一小时的9块，一种永久破解版的无限时长15块，私信快手主播拿进梯子的群号
     </div>
 
+    <div id="custom-text" class="info-box custom-text">
+        <!-- 您可以在此处填写自定义文本内容 -->
+        这里是其他资源内容（请自行修改）
+        <br>
+        <br>
+        <p>示例内容1：XXXX资源获取方式</p>
+        <p>示例内容2：YYYY使用教程</p>
+    </div>
+
     <script>
-        function showWechatQR() {
-            document.getElementById('wechat-qr').style.display = 'block';
-            document.getElementById('alipay-qr').style.display = 'none';
-        }
-        
-        function showAlipayQR() {
-            document.getElementById('alipay-qr').style.display = 'block';
-            document.getElementById('wechat-qr').style.display = 'none';
+        function showPayment(type) {
+            document.getElementById('wechat-qr').style.display = type === 'wechat' ? 'block' : 'none';
+            document.getElementById('alipay-qr').style.display = type === 'alipay' ? 'block' : 'none';
         }
         
         function showQQGroup() {
@@ -135,6 +150,12 @@
             const solutionDiv = document.getElementById('solution-text');
             solutionDiv.style.display = 'block';
             solutionDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showCustomText() {
+            const customDiv = document.getElementById('custom-text');
+            customDiv.style.display = 'block';
+            customDiv.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
